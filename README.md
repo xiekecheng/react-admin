@@ -45,3 +45,15 @@ react-admin
 
 
 
+
+
+进行暴露操作
+
+```
+npm run eject 
+然后提示需要先将代码进行提交,创建本地仓库,命令如下: 
+git init
+git add .
+git commit -m 'eject'
+```
+

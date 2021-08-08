@@ -1,0 +1,1 @@
+export const TEST_MSG_UPDATE = 'update'
