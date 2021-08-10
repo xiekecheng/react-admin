@@ -1,19 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 // 国际化 转换中文
-import { ConfigProvider } from 'antd';
-import zhCN from 'antd/lib/locale/zh_CN';
-import './assets/init.css';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import { ConfigProvider } from 'antd'
+import zhCN from 'antd/lib/locale/zh_CN'
 
+// @ts-ignore
+import {store} from './store/index.ts'
+import { Provider } from 'react-redux'
+// const render = () =>
 ReactDOM.render(
-  
+  <Provider store={store}>
     <ConfigProvider locale={zhCN}>
-    <App />
+      <App />
     </ConfigProvider>
-    ,
-    
+  </Provider>,
   document.getElementById('root')
-);
+)
 
+// render()
+// store.subscribe(render)

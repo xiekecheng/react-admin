@@ -43,9 +43,15 @@ react-admin
 
 如果代码中用到了JSX变量,文件名用.jsx或.tsx
 
+- TypeScript
 
+    它是JS的超集,在TS环境可以兼容JS代码
 
+    在脚手架环境中(mode+ webpack),还做不到实时对TS进行类型检测,但是重启项目可以每次做到检测
 
+    所以在工作共,TS项目几乎都用的是VSCode来做开发
+
+    TS报错不影响程序运行
 
 进行暴露操作
 

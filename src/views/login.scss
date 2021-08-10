@@ -1,0 +1,31 @@
+// S 登录
+.login_page {
+	// margin: 0 auto;
+	text-align: center;
+	.login_form {
+		text-align: center;
+	}
+	#normal_login {
+		margin: 0 auto;
+	}
+}
+.login-form {
+	max-width: 300px;
+	//   text-align: center;
+
+	//   background-color: red;
+}
+.login-form-forgot {
+	float: right;
+}
+.ant-col-rtl .login-form-forgot {
+	float: left;
+}
+.login-form-button {
+	width: 100%;
+}
+// E登录
+
+// body{
+//     background-color: red;
+// }
