@@ -6,11 +6,9 @@ import './login.scss'
 import {useAppSelector,useAppDispatch} from '@/store/hooks';
 import {login} from '@/store/counterSlice';
 const Login = () => {
-  const count = useAppSelector(state=> state.counter.value)
   const token = useAppSelector(state=> state.counter.token)
   const user = useAppSelector(state=> state.counter.user)
   const dispatch = useAppDispatch()
-  console.log(count);
   
   const onFinish = (values:any) => {
     console.log('Received values of form: ', values)

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/store/index'
 import { fetchLogin } from '@/api/user'
+import {useHistory} from 'react-router-dom';
+// const history = useHistory()
 // Define a type for the slice state
 type CounterState = {
 	value: number,
@@ -33,8 +35,9 @@ export const login = createAsyncThunk(
 		// Inferred return type: Promise<MyData>
 		// 调接口
 		const result = await fetchLogin(value)
-		console.log(result.data.token)
-		return result.data.token
+		localStorage.setItem('token', result.data.data.token)
+		console.log('token', result.data.data.token);
+		return result.data.data.token
 	}
 )
 
@@ -57,16 +60,6 @@ export const counterSlice = createSlice({
 	// `createSlice` will infer the state type from the `initialState` argument
 	initialState,
 	reducers: {
-		increment: state => {
-			state.value += 1
-		},
-		decrement: state => {
-			state.value -= 1
-		},
-		// Use the PayloadAction type to declare the contents of `action.payload`
-		incrementByAmount: (state, action: PayloadAction<number>) => {
-			state.value += action.payload
-		},
 		GET_USER_INFO: (state, action) => {
 			state.user = action.payload
 		},
@@ -79,12 +72,15 @@ export const counterSlice = createSlice({
 			state.token = action.payload
 		}),
     builder.addCase(getUserInfo.fulfilled, (state, action) => {
+			console.log(action.payload)
+			// history.push('/')
 			state.user = action.payload
+			
 		})
 	},
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+// export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.counter.value

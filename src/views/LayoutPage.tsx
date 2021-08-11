@@ -1,6 +1,6 @@
 import './style.scss'
-import React, { useState } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import React, { useCallback, useState } from 'react'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 const { SubMenu } = Menu
 import loadable from '@loadable/component'
@@ -26,12 +26,14 @@ const { Header, Sider, Content } = Layout
 const LayoutPage = () => {
 	const [collapsed, setCollapsed] = useState(false)
 	const user = useAppSelector(state => state.counter.user)
-	console.log(user)
+	console.log('user', user)
 
 	const toggle = () => {
 		setCollapsed(!collapsed)
 	}
+	// Sider栏菜单渲染函数
 	const renderMenu = arr => {
+		console.log('开始渲染菜单', arr)
 		return arr.map(
 			item =>
 				item.permission.includes(user.roleName) && (
@@ -39,16 +41,100 @@ const LayoutPage = () => {
 						{item.children &&
 							item.children.map(
 								ele =>
-									(ele.permission.includes(user.roleName) && (
+									ele.permission.includes(user.roleName) && (
 										<Menu.Item key={ele.id}>
 											<Link to={ele.path}>{ele.title}</Link>
-										</Menu.Item>)
+										</Menu.Item>
 									)
 							)}
 					</SubMenu>
 				)
 		)
 	}
+	// 渲染动态路由
+	// const renderRecursion = arr =>{
+	// 	return arr.map(ele=>(
+	// 		(ele.component&&ele.permission.includes(user.roleName))&&<Route path={ele.path} component={ele.component} />)
+	// 		(ele.children&&renderRecursion(ele.children))
+	// 		)
+	// }
+
+	// let resultArr: any = []
+	// const renderRecursion = arr => {
+	// 	console.log('开始渲染路由', resultArr)
+	// 	arr.map(item => {
+	// 		// 含有权限且是路由 则添加进去
+	// 		if (item.permission.includes(user.roleName) && item.component) {
+	// 			console.log('user.roleName'), user.roleName
+
+	// 			resultArr.push(
+	// 				<Route key={item.id} path='/goods_list' component={GoodsList} />
+	// 			)
+	// 		}
+	// 		if (item.children) {
+	// 			console.log('item.children', item.children)
+
+	// 			renderRecursion(item.children)
+	// 		}
+	// 	})
+	// }
+
+	// Luyou
+	// const renderRoutes = arr => {
+	// 	console.log('开始渲染路由', arr,user.roleName)
+	// 	return arr.map(item => {
+	// 		item.children &&
+	// 			item.children.map(
+	// 				ele =>
+	// 					ele.permission.includes(user.roleName) && (
+	// 						<Route exact key={ele.id} path={ele.path} component={ele.component} />
+	// 					)
+	// 			)
+	// 	})
+	// }
+
+	// useCallback((arr) => {
+	// 	let resultArr: any = []
+	// 	const renderRecursion = arr => {
+	// 		console.log('开始渲染路由', resultArr)
+	// 		arr.map(item => {
+	// 			// 含有权限且是路由 则添加进去
+	// 			if (item.permission.includes(user.roleName) && item.component) {
+	// 				resultArr.push(
+	// 					<Route key={item.id} path='/goods_list' component={GoodsList} />
+	// 				)
+	// 			}
+	// 			if (item.children) {
+	// 				console.log('item.children', item.children)
+
+	// 				renderRecursion(item.children)
+	// 			}
+	// 		})
+	// 	}
+	// }, [])
+
+	const renderRoute = useCallback(
+	  (arr, flag) => {
+	    let result:any = []
+	    const recursion = arr => {
+				console.log('开始渲染路由规则');
+	      arr.map(ele=>{
+	        if(!flag || ele.permission.includes(user.roleName)) {
+	          result.push(
+	            <Route exact key={ele.id} path={ele.path} component={ele.component} />
+	          )
+	        }
+	        if(ele.children) recursion(ele.children)
+	      })
+	    }
+	    arr.map(ele=>{
+	      recursion(ele.children)
+	    })
+	    return result
+	  },
+	  []
+	)
+
 	return (
 		<>
 			<Router>
@@ -58,22 +144,8 @@ const LayoutPage = () => {
 							<img src='' alt='' />
 						</div>
 						<Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
-							{/* <Menu.Item key="1" icon={<UserOutlined />}>
-                <Link to="/counter">商品列表</Link>
-              </Menu.Item> */}
-
-							{/* <SubMenu key='sub2' icon={<TeamOutlined />} title='Goods'>
-								<Menu.Item key='5'>
-									<Link to='/goods_list'>商品列表</Link>
-								</Menu.Item>
-								<Menu.Item key='6'>
-									<Link to='/goods_add'>新增商品</Link>
-								</Menu.Item>
-								<Menu.Item key='8'>
-									<Link to='/goods_update'>修改商品</Link>
-								</Menu.Item>
-							</SubMenu> */}
-
+							{/* Sider菜单栏渲染 */}
+							{/* {user.roleName&&renderMenu(goodsArr)} */}
 							{renderMenu(goodsArr)}
 						</Menu>
 					</Sider>
@@ -86,14 +158,16 @@ const LayoutPage = () => {
 									onClick: toggle,
 								}
 							)}
+							用户名: <span>{user.nickName}</span>
 						</Header>
 						<Content className='site-layout-background'>
-							{/* <Route exact path='/counter' component={Counter} />
-							<Route path='/about' component={About} />
-							<Route path='/topics' component={Topics} /> */}
-							<Route path='/goods_list' component={GoodsList} />
-							<Route path='/goods_update' component={GoodsUpdate} />
-							<Route path='/goods_add' component={GoodsAdd} />
+							<Switch>
+								{/* [<Route path='/goods_list' component={GoodsList} />,
+								<Route path='/goods_update' component={GoodsUpdate} />,
+								<Route path='/goods_add' component={GoodsAdd} />] */}
+
+								{user.roleName && renderRoute(goodsArr,true)}
+							</Switch>
 						</Content>
 					</Layout>
 				</Layout>
