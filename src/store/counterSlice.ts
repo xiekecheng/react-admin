@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/store/index'
 import { fetchLogin } from '@/api/user'
+import {useHistory} from 'react-router-dom';
 // const history = useHistory()
 // Define a type for the slice state
 type CounterState = {
@@ -33,14 +34,10 @@ export const login = createAsyncThunk(
 		// const response = await fetch(`https://reqres.in/api/users/${userId}`)
 		// Inferred return type: Promise<MyData>
 		// 调接口
-
-		// const result = await fetchLogin(value)
-		// localStorage.setItem('token', result.data.data.token)
-		// console.log('token', result.data.data.token);
-		// return result.data.data.token
-
-		localStorage.setItem('token','111')
-		return '111'
+		const result = await fetchLogin(value)
+		localStorage.setItem('token', result.data.data.token)
+		console.log('token', result.data.data.token);
+		return result.data.data.token
 	}
 )
 

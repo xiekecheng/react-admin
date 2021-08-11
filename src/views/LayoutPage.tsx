@@ -12,7 +12,7 @@ const GoodsList = loadable(() => import('./goods/GoodsList'))
 const GoodsAdd = loadable(() => import('./goods/GoodsAdd'))
 const GoodsUpdate = loadable(() => import('./goods/GoodsUpdate'))
 import { useAppSelector } from '@/store/hooks'
-import goodsArr from '@/router'
+import goodsArr from '@/router/goods'
 import {
 	MenuUnfoldOutlined,
 	MenuFoldOutlined,
