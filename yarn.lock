@@ -2814,10 +2814,10 @@
   dependencies:
     "color-convert" "^2.0.1"
 
-"antd@^4.16.10":
-  "integrity" "sha1-14V0FBOhh12eUmoJuPU4jMKWd+k="
-  "resolved" "https://registry.nlark.com/antd/download/antd-4.16.10.tgz"
-  "version" "4.16.10"
+"antd@^4.16.11":
+  "integrity" "sha1-kkEWsN5zcPkU6d5sjFpL8Bmz1mg="
+  "resolved" "https://registry.nlark.com/antd/download/antd-4.16.11.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fantd%2Fdownload%2Fantd-4.16.11.tgz"
+  "version" "4.16.11"
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.6.2"
@@ -2835,13 +2835,13 @@
     "rc-drawer" "~4.3.0"
     "rc-dropdown" "~3.2.0"
     "rc-field-form" "~1.20.0"
-    "rc-image" "~5.2.4"
+    "rc-image" "~5.2.5"
     "rc-input-number" "~7.1.0"
     "rc-mentions" "~1.6.1"
     "rc-menu" "~9.0.12"
     "rc-motion" "^2.4.0"
     "rc-notification" "~4.5.7"
-    "rc-pagination" "~3.1.6"
+    "rc-pagination" "~3.1.9"
     "rc-picker" "~2.5.10"
     "rc-progress" "~3.1.0"
     "rc-rate" "~2.9.0"
@@ -2860,7 +2860,6 @@
     "rc-upload" "~4.3.0"
     "rc-util" "^5.13.1"
     "scroll-into-view-if-needed" "^2.2.25"
-    "warning" "^4.0.3"
 
 "anymatch@^2.0.0":
   "integrity" "sha512-5teOsQWABXHHBFP9y3skS5P3d/WfWXpv3FUpy+LorMrNYaT9pI4oLMQX7jzQ2KklNpGpWHzdCXTDT2Y3XGlZBw=="
@@ -9997,7 +9996,7 @@
     "async-validator" "^3.0.3"
     "rc-util" "^5.8.0"
 
-"rc-image@~5.2.4":
+"rc-image@~5.2.5":
   "integrity" "sha1-ROb/yEJiaCeWDnq3LhwNbzqM5EA="
   "resolved" "https://registry.nlark.com/rc-image/download/rc-image-5.2.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Frc-image%2Fdownload%2Frc-image-5.2.5.tgz"
   "version" "5.2.5"
@@ -10070,10 +10069,10 @@
     "rc-resize-observer" "^1.0.0"
     "rc-util" "^5.5.1"
 
-"rc-pagination@~3.1.6":
-  "integrity" "sha1-E7oHGn/LDHmJYHaAbzlEZT578p4="
-  "resolved" "https://registry.nlark.com/rc-pagination/download/rc-pagination-3.1.7.tgz?cache=0&sync_timestamp=1624592253089&other_urls=https%3A%2F%2Fregistry.nlark.com%2Frc-pagination%2Fdownload%2Frc-pagination-3.1.7.tgz"
-  "version" "3.1.7"
+"rc-pagination@~3.1.9":
+  "integrity" "sha1-eXrXXYWx73qCgBIH6tQQEQM3/dY="
+  "resolved" "https://registry.nlark.com/rc-pagination/download/rc-pagination-3.1.9.tgz"
+  "version" "3.1.9"
   dependencies:
     "@babel/runtime" "^7.10.1"
     "classnames" "^2.2.1"
@@ -12500,7 +12499,7 @@
   dependencies:
     "makeerror" "1.0.x"
 
-"warning@^4.0.1", "warning@^4.0.3":
+"warning@^4.0.1":
   "integrity" "sha1-Fungd+uKhtavfWSqHgX9hbRnjKM="
   "resolved" "https://registry.npm.taobao.org/warning/download/warning-4.0.3.tgz"
   "version" "4.0.3"

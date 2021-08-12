@@ -4,14 +4,14 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import './login.scss'
 // import Cookies from 'js-cookie'
 import {useAppSelector,useAppDispatch} from '@/store/hooks';
-import {login} from '@/store/counterSlice';
+import {login} from '@/store/reducer/user';
 const Login = () => {
-  const token = useAppSelector(state=> state.counter.token)
-  const user = useAppSelector(state=> state.counter.user)
+  const token = useAppSelector(state=> state.user.token)
+  const user = useAppSelector(state=> state.user.user)
   const dispatch = useAppDispatch()
   
   const onFinish = (values:any) => {
-    console.log('Received values of form: ', values)
+    console.log('登录数据 ', values)
     // 调接口
     dispatch(login(values))
   }
@@ -66,7 +66,6 @@ const Login = () => {
           >
             登录
           </Button>
-          {/* Or <a href="">register now!</a> */}
         </Form.Item>
       </Form>
     </div>

@@ -12,7 +12,6 @@ const columns = [
 		render: (text, record, index) => (
 			<>
 				<img style={{ width: '60px', height: '60px' }} src={text} alt='' />
-				{/* <span>{text}</span> */}
 			</>
 		),
 	},
@@ -28,10 +27,6 @@ const columns = [
 		title: '商品描述',
 		dataIndex: 'desc',
 	},
-	//   {
-	//     title: '操作',
-	//     dataIndex: 'ops',
-	//   },
 	{
 		title: '操作',
 		key: 'operation',
@@ -81,7 +76,9 @@ const GoodsList = () => {
 				<Input allowClear placeholder='商品名称' />
 				<span>品类</span>
 				<Select>
-					<Select.Option value='demo'>Demo</Select.Option>
+					<Select.Option value='demo0'>Demo0</Select.Option>
+					<Select.Option value='demo1'>Demo1</Select.Option>
+					<Select.Option value='demo2'>Demo2</Select.Option>
 				</Select>
 			</div>
 			{/* E 搜索框 */}
@@ -93,7 +90,7 @@ const GoodsList = () => {
 					rowSelection={rowSelection}
 					columns={columns}
 					dataSource={data}
-					rowKey='uid'
+					rowKey='_id'
 				/>
 			</div>
 			{/* E 商品列表 */}

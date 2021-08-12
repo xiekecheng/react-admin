@@ -37,6 +37,7 @@ const GoodsUpdate = () => {
 	}
 	return (
 		<div>
+			<h1>修改商品</h1>
 			<Form
 				labelCol={{
 					span: 4,
@@ -51,13 +52,6 @@ const GoodsUpdate = () => {
 				onValuesChange={onFormLayoutChange}
 				size={componentSize}
 			>
-				{/* <Form.Item label="Form Size" name="size">
-          <Radio.Group>
-            <Radio.Button value="small">Small</Radio.Button>
-            <Radio.Button value="default">Default</Radio.Button>
-            <Radio.Button value="large">Large</Radio.Button>
-          </Radio.Group>
-        </Form.Item> */}
 				<Form.Item label='商品名称'>
 					<Input />
 				</Form.Item>

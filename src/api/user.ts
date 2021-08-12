@@ -1,14 +1,22 @@
-import axios from '@/utils/axios';
+import axios from '@/utils/axios'
 
 // localhost:9999/api/v1/vueadmin/login
-const fetchLogin = (data:any)=>(
+const fetchLogin = (data: any) =>
 	axios({
-		url:'/vueadmin/login',
-		method:'post',
-		data
+		url: '/antd/login',
+		method: 'post',
+		data,
 	})
-)
 
-export{
-	fetchLogin
-}
+const fetchUserInfo = (params: object) =>
+	axios({
+		url: '/antd/userInfo',
+		method: 'get',
+		params,
+	})
+const fetchUserList = () =>
+	axios({
+		url: '/antd/userList',
+		method: 'get'
+	})
+export { fetchLogin, fetchUserInfo,fetchUserList }

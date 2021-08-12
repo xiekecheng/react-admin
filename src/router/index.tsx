@@ -21,32 +21,55 @@ const GoodsUpdate = loadable(() => import('@/views/goods/GoodsUpdate'))
 const BasicForm = loadable(() => import('@/views/form/BasicForm'))
 const SubstepForm = loadable(() => import('@/views/form/SubstepForm'))
 const AdvancedForm = loadable(() => import('@/views/form/AdvancedForm'))
+
+// 文章模块
+const ArticleList = loadable(() => import('@/views/article/ArticleList'))
+const ArticleAdd = loadable(() => import('@/views/article/ArticleAdd'))
+const ArticleEdit = loadable(() => import('@/views/article/ArticleEdit'))
+
+// 用户模块
+const UserList = loadable(() => import('@/views/user/UserList'))
 const routes = [
+	{
+		id: 1300,
+		icon: <TeamOutlined />,
+		title: '用户管理',
+		permission: ['admin'],
+		children: [
+			{
+				id: 1301,
+				path: '/user_list',
+				component: UserList,
+				title: '用户列表',
+				permission: ['admin'],
+			},
+		],
+	},
 	{
 		id: 1000,
 		icon: <TeamOutlined />,
-		title: 'Goods',
+		title: '文章管理',
 		permission: ['editor'],
 		children: [
 			{
 				id: 1001,
-				path: '/goods_list',
-				component: GoodsList,
-				title: '商品列表',
-				permission: ['admin'],
+				path: '/article_list',
+				component: ArticleList,
+				title: '文章列表',
+				permission: ['editor'],
 			},
 			{
 				id: 1002,
-				path: '/goods_add',
-				component: GoodsAdd,
-				title: '新增商品',
-				permission: ['admin'],
+				path: '/article_add',
+				component: ArticleAdd,
+				title: '新增文章',
+				permission: ['editor'],
 			},
 			{
 				id: 1003,
-				path: '/goods_update',
-				component: GoodsUpdate,
-				title: '修改商品',
+				path: '/article_update',
+				component: ArticleEdit,
+				title: '修改文章',
 				permission: ['editor'],
 			},
 		],
@@ -54,28 +77,28 @@ const routes = [
 	{
 		id: 1100,
 		icon: <TeamOutlined />,
-		title: 'Goods',
+		title: '商品管理',
 		permission: ['admin', 'editor'],
 		children: [
 			{
 				id: 1101,
 				path: '/goods_list',
 				component: GoodsList,
-				title: '商品列表-admin',
+				title: '商品列表',
 				permission: ['admin','editor'],
 			},
 			{
 				id: 1102,
 				path: '/goods_add',
 				component: GoodsAdd,
-				title: '新增商品 admin-editor',
+				title: '新增商品',
 				permission: ['admin', 'editor'],
 			},
 			{
 				id: 1103,
 				path: '/goods_update',
 				component: GoodsUpdate,
-				title: '修改商品editor',
+				title: '修改商品',
 				permission: ['admin','editor'],
 			},
 		],

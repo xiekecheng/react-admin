@@ -40,6 +40,7 @@ const fileList = [
   }
   return (
     <div>
+    <h1>添加商品</h1>
       <Form
         labelCol={{
           span: 4,

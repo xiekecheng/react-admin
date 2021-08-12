@@ -6,16 +6,12 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 
 // @ts-ignore
-import {store} from './store/index.ts'
-import { Provider } from 'react-redux'
+// import {store} from './store/index.ts'
+// import { Provider } from 'react-redux'
 // const render = () =>
 ReactDOM.render(
-  <Provider store={store}>
-    <ConfigProvider locale={zhCN}>
       <App />
-    </ConfigProvider>
-  </Provider>,
-  document.getElementById('root')
+  ,document.getElementById('root')
 )
 
 // render()

@@ -1,38 +1,23 @@
-import React, { useEffect } from 'react'
-import '@/assets/App.css'
-import './assets/init.css'
-// import './app.scss'
-import 'antd/dist/antd.css' // or 'antd/dist/antd.less'
-import LayoutPage from '@/views/LayoutPage'
-import Login from '@/views/Login'
-import { BrowserRouter,Route,Switch, useHistory } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { getUserInfo } from '@/store/counterSlice'
-function App() {
-	const dispatch = useAppDispatch()
-	const token = useAppSelector(state => state.counter.token)
-	const user = useAppSelector(state => state.counter.user)
-	useHistory().replace('/login')
-	// 有token,则用token获取user信息
-	useEffect(() => {
-		if (token) {
-			dispatch(getUserInfo(token))
-		}
-	}, [token])
-  useEffect(()=>{
-		if(!token){
-			
-		}
-  }, [token])
+import React from 'react'
+import '@/assets/init.css'
+import zhCN from 'antd/lib/locale/zh_CN'
+import { Provider } from 'react-redux'
+import DashBoard from '@/dashboard/'
+import { store } from '@/store'
+import { HashRouter } from 'react-router-dom'
+import { ConfigProvider } from 'antd'
+
+const App = ()=> {
+	// const useAppSelector()
+
 	return (
-		<>
-		<BrowserRouter>
-			<Switch>
-				<Route path='/' component={LayoutPage}/>
-				<Route path='/login' component={Login}/>
-			</Switch>
-		</BrowserRouter>
-		</>
+		<HashRouter>
+			<Provider store={store}>
+				<ConfigProvider locale={zhCN}>
+					<DashBoard />
+				</ConfigProvider>
+			</Provider>
+		</HashRouter>
 	)
 }
 
