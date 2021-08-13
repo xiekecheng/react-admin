@@ -86,7 +86,7 @@ const LayoutPage = () => {
 									onClick: toggle,
 								}
 							)}
-							用户名: <span>{user.nickName}</span>
+							用户名: <span>{user.roleName}</span>
 						</Header>
 						<Content className='site-layout-background'>
 							<Switch>

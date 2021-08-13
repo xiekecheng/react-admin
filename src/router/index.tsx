@@ -9,7 +9,15 @@ import {
 	CheckSquareOutlined,
 	AreaChartOutlined,
 	TeamOutlined,
+	FormOutlined,
+	createFromIconfontCN,
 } from '@ant-design/icons'
+const IconFont = createFromIconfontCN({
+  scriptUrl: [
+    '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
+    '//at.alicdn.com/t/font_1788592_a5xf2bdic3u.js', // icon-shoppingcart, icon-python
+  ],
+});
 
 import loadable from '@loadable/component'
 // 商品模块
@@ -47,36 +55,36 @@ const routes = [
 	},
 	{
 		id: 1000,
-		icon: <TeamOutlined />,
+		icon: <FormOutlined />,
 		title: '文章管理',
-		permission: ['editor'],
+		permission: ['editor','admin'],
 		children: [
 			{
 				id: 1001,
 				path: '/article_list',
 				component: ArticleList,
 				title: '文章列表',
-				permission: ['editor'],
+				permission: ['editor','admin'],
 			},
 			{
 				id: 1002,
 				path: '/article_add',
 				component: ArticleAdd,
 				title: '新增文章',
-				permission: ['editor'],
+				permission: ['editor','admin'],
 			},
 			{
 				id: 1003,
 				path: '/article_update',
 				component: ArticleEdit,
 				title: '修改文章',
-				permission: ['editor'],
+				permission: ['editor','admin'],
 			},
 		],
 	},
 	{
 		id: 1100,
-		icon: <TeamOutlined />,
+		icon:  <IconFont type="icon-shoppingcart" />,
 		title: '商品管理',
 		permission: ['admin', 'editor'],
 		children: [
@@ -105,7 +113,7 @@ const routes = [
 	},
   {
 		id: 1200,
-		icon: <TeamOutlined />,
+		icon: <UnorderedListOutlined />,
 		title: '表单页',
 		permission: ['admin', 'editor'],
 		children: [
