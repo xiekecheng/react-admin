@@ -53,7 +53,7 @@ react-admin
 
     TS报错不影响程序运行
 
-进行暴露操作
+进行暴露操作2222
 
 ```
 npm run eject 
