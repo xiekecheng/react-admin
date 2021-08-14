@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-08-11 11:10:57
- * @LastEditTime: 2021-08-13 20:22:55
+ * @LastEditTime: 2021-08-14 15:17:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /react-admin/src/store/reducer/user.ts
  */
-// TODO  
+// TODO
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/store/index'
 import {
@@ -18,12 +18,12 @@ import {
 	fetchChangeUserStatus,
 } from '@/api/user'
 // Define a type for the slice state
-type UserState = {
+interface UserState {
 	value: number,
 	token: string,
 	user: any,
 	list: any,
-	total:number
+	total: number
 }
 //
 // 定义state初始值
@@ -31,7 +31,7 @@ const initialState: UserState = {
 	value: 0,
 	token: localStorage.getItem('token') || '',
 	list: '',
-	total:0,
+	total: 0,
 	user: {
 		roleName: '',
 		nickName: '',
@@ -63,29 +63,34 @@ export const getUserInfo = createAsyncThunk(
 )
 
 // 获取用户列表
-export const getUserList = createAsyncThunk('user/getUserList', async (params:object) => {
-	const userList = await fetchUserList(params)
-	console.log('userList',userList.data);
-	const list = userList.data.data
-	console.log('list',list);
-	// return list
-	return userList.data.data
-})
+export const getUserList = createAsyncThunk(
+	'user/getUserList',
+	async (params: object) => {
+		const userList = await fetchUserList(params)
+		console.log('userList', userList.data)
+		const list = userList.data.data
+		console.log('list', list)
+		// return list
+		return userList.data.data
+	}
+)
 
 // 搜索用户
-export const getSearchUser = createAsyncThunk('user/getSearchUser',async(username:object)=>{
-	const list = await fetchSearchUser(username)
-	console.log(list.data.data)
-	return list.data.data
-	
-})
+export const getSearchUser = createAsyncThunk(
+	'user/getSearchUser',
+	async (username: object) => {
+		const list = await fetchSearchUser(username)
+		console.log(list.data.data)
+		return list.data.data
+	}
+)
 
 // 添加用户
 export const addUser = createAsyncThunk(
 	'user/addUser',
 	async (user: object) => {
 		const data = await fetchAddUser(user)
-		console.log('data',data)
+		console.log('data', data)
 		return data.data
 	}
 )
@@ -93,10 +98,9 @@ export const addUser = createAsyncThunk(
 // 修改用户状态
 export const changeUserStatus = createAsyncThunk(
 	'user/antd/changeUserStatus',
-	async (params:object)=>{
+	async (params: object) => {
 		const result = await fetchChangeUserStatus(params)
-		console.log(result);
-		
+		console.log(result)
 	}
 )
 
@@ -113,19 +117,19 @@ export const counterSlice = createSlice({
 		// },
 	},
 	extraReducers: (builder) => {
-		builder.addCase(login.fulfilled, (state, action) => {
-			state.token = action.payload
-		}),
-			builder.addCase(getUserInfo.fulfilled, (state, action) => {
+		builder
+			.addCase(login.fulfilled, (state, action) => {
+				state.token = action.payload
+			})
+			.addCase(getUserInfo.fulfilled, (state, action) => {
 				state.user = action.payload
-			}),
-			builder.addCase(getUserList.fulfilled, (state, action) => {
-				console.log('action.payload',action.payload);
+			})
+			.addCase(getUserList.fulfilled, (state, action) => {
+				console.log('action.payload', action.payload)
 				state.list = action.payload.userList
 				state.total = action.payload.total
 			})
-			,
-			builder.addCase(addUser.fulfilled, (state, action) => {
+			.addCase(addUser.fulfilled, (state, action) => {
 				// state.list = action.payload
 			})
 	},

@@ -1,80 +1,87 @@
 /*
  * @Author: your name
  * @Date: 2021-08-11 11:29:43
- * @LastEditTime: 2021-08-13 22:01:35
+ * @LastEditTime: 2021-08-14 17:09:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /react-admin/src/views/article/ArticleAdd.tsx
  */
 import React, { useState } from 'react'
 import './style.scss'
-import {
-	Form,
-	Input,
-	Button,
-	Radio,
-	Select,
-	Cascader,
-	DatePicker,
-	InputNumber,
-	TreeSelect,
-	Switch,
-} from 'antd'
+import { Form, Input, Button, Select } from 'antd'
 // import { Select } from 'antd';
-import { Upload } from 'antd';
-import ImgCrop from 'antd-img-crop';
+import { Upload } from 'antd'
+import ImgCrop from 'antd-img-crop'
 const { Option } = Select
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+// import { fetchAddArticle } from '@/api/article'
+import { useAppDispatch } from '@/store/hooks'
+import { addArticle } from '@/store/reducer/article'
+import { useHistory } from 'react-router-dom'
+import { message, Space } from 'antd'
+
+// import {} from '@reduxjs/tookit';
 const BasicForm = () => {
+	const history = useHistory()
+	const dispatch = useAppDispatch()
 	const [filter, setFilter] = useState({
 		author: '',
 		title: '',
 		type: '',
+		articleImg: '',
 		content: '',
 	})
 	//S 图片上传
-  const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-  ]);
-	const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-  };
+	const [fileList, setFileList] = useState([])
 
-  const onPreview = async file => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise(resolve => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow&&imgWindow.document.write(image.outerHTML);
-  };
+	// 文件上传后的回调函数
+	// TODO: 可优化,文件上传先放在cookie或者内存中中,带提交表单再上传图片至服务器
+	const onChange = (e) => {
+		console.log('上传成功', e)
+		setFileList(e.fileList)
+		// 把后端返回的图片访问地址，给到父组件
+		// onChange
+		if (e.file.status === 'done') {
+			console.log(e.file.response.data.imgPath)
+			setFilter({ ...filter, articleImg: e.file.response.data.imgPath })
+		}
+		// 调接口
+		// setFileList(newFileList)
+	}
+
+	const onPreview = async (file) => {
+		let src = file.url
+		if (!src) {
+			src = await new Promise((resolve) => {
+				const reader = new FileReader()
+				reader.readAsDataURL(file.originFileObj)
+				reader.onload = () => resolve(reader.result)
+			})
+		}
+		const image = new Image()
+		image.src = src
+		const imgWindow = window.open(src)
+		imgWindow && imgWindow.document.write(image.outerHTML)
+	}
 
 	//E 图片上传
-	const [articleContent, setArticleContent] = useState('')
-	const onFinish = (values: any) => {
-		console.log('Received values of form: ', values)
-	}
-	const publicArticle = () => {
+
+	// 发布文章
+	const publishArticle = () => {
 		console.log('发布文章', filter)
+		// 调接口
+		dispatch(addArticle(filter)).then(() => {
+			console.log('发布文章完毕,跳转~')
+			message.success('成功发布文章~', 1).then(() => {
+				history.push('/article_list')
+			})
+		})
 	}
 	const handleContent = (content) => {
 		setFilter({ ...filter, content })
 	}
-	function handleChange(value) {
-		console.log(`selected ${value}`)
-	}
+
 	const modules = {
 			toolbar: [
 				[{ header: [1, 2, false] }],
@@ -111,7 +118,7 @@ const BasicForm = () => {
 					labelCol={{ span: 4 }}
 					wrapperCol={{ span: 14 }}
 					layout='horizontal'
-					onFinish={onFinish}
+					// onFinish={onFinish}
 					// initialValues={{ size: componentSize }}
 					// onValuesChange={onFormLayoutChange}
 					// size={componentSize as SizeType
@@ -143,21 +150,25 @@ const BasicForm = () => {
 							<Option value='poet'>诗歌</Option>
 						</Select>
 					</Form.Item>
-					<Form.Item label="文章缩略图">
-					<ImgCrop rotate>
-      <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
-        fileList={fileList}
-        onChange={onChange}
-        onPreview={onPreview}
-      >
-        {fileList.length < 5 && '+ Upload'}
-      </Upload>
-    </ImgCrop>
+					<Form.Item label='文章缩略图'>
+						{/* TODO: 文件上传框组件封装 */}
+						<ImgCrop rotate>
+							<Upload
+								action='http://localhost:3000/api/v1/antd/article/UploadImg'
+								name='file'
+								listType='picture-card'
+								fileList={fileList}
+								onChange={onChange}
+								onPreview={onPreview}
+								maxCount={1}
+							>
+								{fileList.length < 1 && '+ Upload'}
+							</Upload>
+						</ImgCrop>
 					</Form.Item>
 					<Form.Item label='内容'>
 						{/* react-quill 富文本框 */}
+						{/* TODO: 富文本框组件封装 */}
 						<ReactQuill
 							className='text-editor'
 							formats={formats}
@@ -165,22 +176,12 @@ const BasicForm = () => {
 							theme='snow'
 							value={filter.content}
 							onChange={handleContent}
+							// progress={ strokeWidth: 2, showInfo: false }
 						/>
 					</Form.Item>
 					<Form.Item>
-						<Button onClick={publicArticle}>发布文章</Button>
+						<Button onClick={publishArticle}>发布文章</Button>
 					</Form.Item>
-
-					{/* <Form.Item>
-						<Button
-							type='primary'
-							htmlType='submit'
-							className='login-form-button'
-						>
-							Log in
-						</Button>
-						Or <a href=''>register now!</a>
-					</Form.Item> */}
 				</Form>
 			</div>
 		</div>

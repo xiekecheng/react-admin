@@ -75,7 +75,8 @@ const routes = [
 			},
 			{
 				id: 1003,
-				path: '/article_update',
+				path: '/article_update/:articleId',
+				// path: '/article_update',
 				component: ArticleEdit,
 				title: '修改文章',
 				permission: ['editor','admin'],
