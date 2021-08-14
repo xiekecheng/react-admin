@@ -1,3 +1,12 @@
+/*
+ * @Author: your name
+ * @Date: 2021-08-11 11:10:57
+ * @LastEditTime: 2021-08-13 20:22:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /react-admin/src/store/reducer/user.ts
+ */
+// TODO  
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/store/index'
 import {
@@ -6,6 +15,7 @@ import {
 	fetchUserList,
 	fetchAddUser,
 	fetchSearchUser,
+	fetchChangeUserStatus,
 } from '@/api/user'
 // Define a type for the slice state
 type UserState = {
@@ -15,7 +25,7 @@ type UserState = {
 	list: any,
 	total:number
 }
-
+//
 // 定义state初始值
 const initialState: UserState = {
 	value: 0,
@@ -77,6 +87,16 @@ export const addUser = createAsyncThunk(
 		const data = await fetchAddUser(user)
 		console.log('data',data)
 		return data.data
+	}
+)
+
+// 修改用户状态
+export const changeUserStatus = createAsyncThunk(
+	'user/antd/changeUserStatus',
+	async (params:object)=>{
+		const result = await fetchChangeUserStatus(params)
+		console.log(result);
+		
 	}
 )
 

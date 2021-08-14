@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Table, Space, Button, Modal, Form } from 'antd'
 import { Input } from 'antd'
 import { Row, Col } from 'antd'
+import { Switch } from 'antd'
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { Radio } from 'antd'
 import { DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons'
 import { useAppSelector, useAppDispatch } from '@/store/hooks'
-import { addUser, getSearchUser, getUserList } from '@/store/reducer/user'
+import { addUser, changeUserStatus, getSearchUser, getUserList } from '@/store/reducer/user'
 const { Search } = Input
 
 const UserList = () => {
@@ -13,6 +15,7 @@ const UserList = () => {
 	const list = useAppSelector((state) => state.user.list)
 	const total = useAppSelector((state) => state.user.total)
 	const [count, setCount] = useState(0)
+	// const [searchName, setSearchName] = useState('')
 	// 数据列表
 	// const [list,setList] = useState([])
 	// 页码
@@ -27,10 +30,74 @@ const UserList = () => {
 		roleName: '',
 		status: '',
 	})
+	// 调接口获取用户列表
 	useEffect(() => {
 		// 获取用户列表
 		dispatch(getUserList({ page, size, selectUsername }))
 	}, [count])
+
+	// 搜索框模糊搜索
+	const onSearchUser = (username) => {
+		// dispatch(getSearchUser({username}))
+		setSelectUsername(username)
+		console.log('selectUsername', selectUsername)
+
+		dispatch(getUserList({ page, size, selectUsername })).then(() => {
+			setCount(count + 1)
+		})
+		console.log(username)
+	}
+
+	// S添加用户弹框
+	const [visible, setVisible] = useState(false)
+	const [confirmLoading, setConfirmLoading] = useState(false)
+	const [modalText, setModalText] = useState('Content of the modal')
+
+	// const onFinish = (values: any) => {
+	// 	console.log('Success:', values)
+	// }
+
+	// const onFinishFailed = (errorInfo: any) => {
+	// 	console.log('Failed:', errorInfo)
+	// }
+
+	// 显示model框
+	const showAddUserModel = () => {
+		setVisible(true)
+	}
+
+	// 添加用户
+	const handleAddUser = () => {
+		setModalText('The modal will be closed after two seconds')
+		setConfirmLoading(true)
+		setCount(count + 1)
+		console.log('addUserList', addUserList)
+
+		// 调接口
+		dispatch(addUser(addUserList)).then((res) => {
+			setAddUserList({
+				username: '',
+				role: '',
+				roleName: '',
+				status: '',
+			})
+			setCount(count + 1)
+			setVisible(false)
+			setConfirmLoading(false)
+		})
+	}
+	// 关闭model框
+	const closeAddUserModel = () => {
+		setVisible(false)
+	}
+	// E添加用户弹框
+
+	const changeStatus = (check: boolean,event: MouseEvent,record: any)=>{
+		console.log('check,event,record',record);
+		dispatch(changeUserStatus({_id:record._id,status:Number(check)}))
+		setCount(count+1)
+	}
+
 	const columns = [
 		{
 			title: '用户名',
@@ -58,6 +125,22 @@ const UserList = () => {
 		},
 		{
 			title: '操作',
+			key: 'status',
+			dataIndex: 'status',
+			render: (status, record) => (
+				<>
+					<Switch
+						checked={status===1?true:false}
+						checkedChildren={'启用'}
+						unCheckedChildren='禁用'
+						defaultChecked
+						onChange={(check,event)=>changeStatus(check,event,record)}
+					/>
+				</>
+			),
+		},
+		{
+			title: '操作',
 			key: 'action',
 			render: (text, record) => (
 				<>
@@ -76,69 +159,6 @@ const UserList = () => {
 			),
 		},
 	]
-
-	const onSearchUser = (username) => {
-		// dispatch(getSearchUser({username}))
-		dispatch(getUserList({ page, size, username }))
-		console.log(username)
-	}
-	// const showAddUserModel = () => {
-	// 	console.log('调用添加用户接口')
-	// }
-	// S添加用户弹框
-	const [visible, setVisible] = React.useState(false)
-	const [confirmLoading, setConfirmLoading] = React.useState(false)
-	const [modalText, setModalText] = React.useState('Content of the modal')
-
-	const onFinish = (values: any) => {
-		console.log('Success:', values)
-	}
-
-	const onFinishFailed = (errorInfo: any) => {
-		console.log('Failed:', errorInfo)
-	}
-	const showAddUserModel = () => {
-		console.log('展示')
-
-		setVisible(true)
-	}
-
-	// 添加用户
-	const handleAddUser = () => {
-		setModalText('The modal will be closed after two seconds')
-		setConfirmLoading(true)
-		setCount(count + 1)
-		console.log('addUserList', addUserList)
-
-		// 调接口
-		dispatch(addUser(addUserList)).then((res) => {
-			// console.log('res',res);
-			setAddUserList({
-				username: '',
-				role: '',
-				roleName: '',
-				status: '',
-			})
-			setCount(count + 1)
-			setVisible(false)
-			setConfirmLoading(false)
-		})
-	}
-
-	const handleCancel = () => {
-		console.log('关闭model弹框')
-		setVisible(false)
-	}
-	// E添加用户弹框
-
-	// const handle = value => {
-	// 	console.log('handle', value)
-	// 	setAddUserList({
-	// 		...addUserList,
-	// 		username: value,
-	// 	})
-	// 	console.log(addUserList)
-	// }
 
 	return (
 		<div>
@@ -169,7 +189,7 @@ const UserList = () => {
 						visible={visible}
 						onOk={handleAddUser}
 						confirmLoading={confirmLoading}
-						onCancel={handleCancel}
+						onCancel={closeAddUserModel}
 					>
 						<p>{modalText}</p>
 						<Form.Item label='username'>
@@ -214,6 +234,7 @@ const UserList = () => {
 					//  pageSize:15,
 					total,
 					defaultCurrent: 1,
+					showQuickJumper:true
 					//  current:5
 				}}
 				rowKey='_id'

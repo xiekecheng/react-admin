@@ -7907,6 +7907,11 @@
   dependencies:
     "object-visit" "^1.0.0"
 
+"mapvgl@^1.0.0-beta.133":
+  "integrity" "sha1-4F0DtbTMCXgsC1+2e/6U1kkFISE="
+  "resolved" "https://registry.nlark.com/mapvgl/download/mapvgl-1.0.0-beta.133.tgz?cache=0&sync_timestamp=1628138806825&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fmapvgl%2Fdownload%2Fmapvgl-1.0.0-beta.133.tgz"
+  "version" "1.0.0-beta.133"
+
 "md5.js@^1.3.4":
   "integrity" "sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg=="
   "resolved" "https://registry.npmjs.org/md5.js/-/md5.js-1.3.5.tgz"
@@ -10273,6 +10278,16 @@
     "regenerator-runtime" "^0.13.7"
     "whatwg-fetch" "^3.4.1"
 
+"react-bmapgl@^0.1.26":
+  "integrity" "sha1-90pbVogXb6XCtB8e5LwGyA0XXKE="
+  "resolved" "https://registry.nlark.com/react-bmapgl/download/react-bmapgl-0.1.26.tgz?cache=0&sync_timestamp=1628250490767&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-bmapgl%2Fdownload%2Freact-bmapgl-0.1.26.tgz"
+  "version" "0.1.26"
+  dependencies:
+    "mapvgl" "^1.0.0-beta.133"
+    "react" "^17.0.1"
+    "react-dom" "^17.0.1"
+    "shallowequal" "^1.1.0"
+
 "react-dev-utils@^11.0.3":
   "integrity" "sha1-p8y2Alehyi4O/nqD445nANF6o3o="
   "resolved" "https://registry.nlark.com/react-dev-utils/download/react-dev-utils-11.0.4.tgz"
@@ -10303,7 +10318,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^17.0.2", "react-dom@>= 16.9.0", "react-dom@>=16.9.0":
+"react-dom@*", "react-dom@^17.0.1", "react-dom@^17.0.2", "react-dom@>= 16.9.0", "react-dom@>=16.9.0":
   "integrity" "sha1-7P+2hF462Nv83EmPDQqTlzZQLCM="
   "resolved" "https://registry.nlark.com/react-dom/download/react-dom-17.0.2.tgz?cache=0&sync_timestamp=1628093929097&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-dom%2Fdownload%2Freact-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -10373,7 +10388,7 @@
     "tiny-invariant" "^1.0.2"
     "tiny-warning" "^1.0.0"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.14.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.2", "react@>= 16.9.0", "react@>=15", "react@>=16.0.0", "react@>=16.3.0", "react@>=16.9.0", "react@17.0.2":
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.14.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.1", "react@^17.0.2", "react@>= 16.9.0", "react@>=15", "react@>=16.0.0", "react@>=16.3.0", "react@>=16.9.0", "react@17.0.2":
   "integrity" "sha1-0LXMUW0p6z7uOD91tihkz7aAADc="
   "resolved" "https://registry.nlark.com/react/download/react-17.0.2.tgz?cache=0&sync_timestamp=1628093920614&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact%2Fdownload%2Freact-17.0.2.tgz"
   "version" "17.0.2"

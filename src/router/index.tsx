@@ -27,7 +27,7 @@ const GoodsUpdate = loadable(() => import('@/views/goods/GoodsUpdate'))
 
 // 表单模块
 const BasicForm = loadable(() => import('@/views/form/BasicForm'))
-const SubstepForm = loadable(() => import('@/views/form/SubstepForm'))
+const SubstepForm = loadable(() => import('@/views/form/SubstepForm.jsx'))
 const AdvancedForm = loadable(() => import('@/views/form/AdvancedForm'))
 
 // 文章模块
@@ -70,7 +70,7 @@ const routes = [
 				id: 1002,
 				path: '/article_add',
 				component: ArticleAdd,
-				title: '新增文章',
+				title: '发布文章',
 				permission: ['editor','admin'],
 			},
 			{
