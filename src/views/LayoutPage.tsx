@@ -14,14 +14,12 @@ const { Header, Sider, Content } = Layout
 const LayoutPage = () => {
 	const [collapsed, setCollapsed] = useState(false)
 	const user = useAppSelector(state => state.user.user)
-	console.log('user', user)
 
 	const toggle = () => {
 		setCollapsed(!collapsed)
 	}
 	// Sider栏菜单渲染函数
 	const renderMenu = arr => {
-		console.log('开始渲染菜单', arr)
 		return arr.map(
 			item =>
 				item.permission.includes(user.role) && (
@@ -43,7 +41,6 @@ const LayoutPage = () => {
 	const renderRoute = useCallback((arr, flag) => {
 		let result: any = []
 		const recursion = arr => {
-			console.log('开始渲染路由规则')
 			arr.map(ele => {
 				if (!flag || ele.permission.includes(user.role)) {
 					result.push(

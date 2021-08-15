@@ -1,7 +1,7 @@
 /*
  * @Author: xkccoding@gmail.com
  * @Date: 2021-08-11 11:30:02
- * @LastEditTime: 2021-08-14 18:00:11
+ * @LastEditTime: 2021-08-15 02:04:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /react-admin/src/views/article/ArticleEdit.tsx
@@ -31,6 +31,9 @@ import { message, Space } from 'antd';
 const ArticleEdit = () => {
 	const history = useHistory()
 	const dispatch = useAppDispatch()
+	const article = useAppSelector(state=>state.article.article)
+	console.log('article=>',article);
+	
 	// const article =useAppSelector(state=>state.article.)
 	const  param:any = useParams()
 	const [filter, setFilter] = useState({
@@ -43,22 +46,49 @@ const ArticleEdit = () => {
 
 	const [fileList, setFileList] = useState([])
 	useEffect(()=>{
-		console.log('articleId',param.articleId);
+		if(article.author){
+			console.log('article',article);
+						
+			setFilter({...filter,title:article.title||''})
+
+			setFilter({...filter,author:article.author||''})
+			// // console.log('filter',filter);
+			setFilter({...filter,type:article.type||''})
+			// // console.log('filter',filter);
+			// setFilter({...filter,articleImg:article.articleImg||''})
+			// // console.log('filter',filter);
+			setFilter({...filter,content:article.content||''})
+			console.log('filter======>',filter);
+			
+		}
+	},[])
+	useEffect(()=>{
 		dispatch(getArticleById({_id:param.articleId})).then(res=>{
-			console.log('res',res.payload);
-			const {author,title,type,articleImg,content} = res.payload
-			const param= {
-				author,title,type,articleImg,content
-			}
-			setFilter(param)
-			// setFilter({...filter,title})
-			// setFilter({...filter,type})
-			// setFilter({...filter,articleImg})
-			// setFilter({...filter,content})
-			console.log(filter);
+			// console.log('res.payload',res.payload);
+			// console.log('article',article);
+			
+			
+			// let {author,title,type,articleImg,content} = res.payload
+			// const param= {
+			// 	author,title,type,articleImg,content
+			// }
+			// setFilter(param)
+			// console.log('res.payload.title',res.payload.title);
+			
+			// setFilter({...filter,title:res.payload.title})
+
+			// setFilter({...filter,author:res.payload.author})
+			// // console.log('filter',filter);
+			// setFilter({...filter,type:res.payload.type})
+			// // console.log('filter',filter);
+			// setFilter({...filter,articleImg:res.payload.articleImg})
+			// // console.log('filter',filter);
+			// setFilter({...filter,content:res.payload.content})
+			// // console.log('filter',filter);
+			// console.log('filter',filter);
+			
 			
 		})
-		console.log();
 		
 	},[])
 

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-06 19:04:20
- * @LastEditTime: 2021-08-14 15:04:43
+ * @LastEditTime: 2021-08-15 00:15:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /react-admin/src/utils/axios.ts
@@ -34,7 +34,6 @@ instance.interceptors.request.use(function (config) {
 
 // 响应拦截器
 instance.interceptors.response.use(function (response) {
-    console.log('响应请求:',response);
     return response;
 }, function (error) {
 

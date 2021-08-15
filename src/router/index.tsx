@@ -72,15 +72,18 @@ const routes = [
 				component: ArticleAdd,
 				title: '发布文章',
 				permission: ['editor','admin'],
+				children:[
+					{
+						id: 1003,
+						path: '/article_update/:articleId',
+						// path: '/article_update',
+						component: ArticleEdit,
+						title: '修改文章',
+						permission: ['editor','admin'],
+					},
+				]
 			},
-			{
-				id: 1003,
-				path: '/article_update/:articleId',
-				// path: '/article_update',
-				component: ArticleEdit,
-				title: '修改文章',
-				permission: ['editor','admin'],
-			},
+
 		],
 	},
 	{
