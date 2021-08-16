@@ -9,6 +9,8 @@
     "antd": "^4.16.11",
     "antd-img-crop": "^3.14.3",
     "axios": "^0.21.1",
+    "bizcharts": "^4.1.11",
+    "echarts": "^5.1.2",
     "http-proxy-middleware": "^2.0.1",
     "immer": "^9.0.5",
     "js-cookie": "^3.0.0",

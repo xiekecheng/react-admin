@@ -118,28 +118,28 @@ const routes = [
   {
 		id: 1200,
 		icon: <UnorderedListOutlined />,
-		title: '表单页',
+		title: '图表页',
 		permission: ['admin', 'editor'],
 		children: [
 			{
 				id: 1201,
 				path: '/form_basic',
 				component: BasicForm,
-				title: '基础表单',
+				title: 'Echarts图表',
 				permission: ['admin','editor'],
 			},
 			{
 				id: 1202,
 				path: '/form_substep',
 				component: SubstepForm,
-				title: '分布表单',
+				title: '地图',
 				permission: ['admin', 'editor'],
 			},
 			{
 				id: 1203,
 				path: '/form_advanced',
 				component: AdvancedForm,
-				title: '高级表单',
+				title: 'BX Charts图表',
 				permission: ['admin','editor'],
 			},
 		],
