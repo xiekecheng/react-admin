@@ -25,11 +25,15 @@ const GoodsList = loadable(() => import('@/views/goods/GoodsList'))
 const GoodsAdd = loadable(() => import('@/views/goods/GoodsAdd'))
 const GoodsUpdate = loadable(() => import('@/views/goods/GoodsUpdate'))
 
-// 表单模块
-const BasicForm = loadable(() => import('@/views/form/BasicForm'))
-const SubstepForm = loadable(() => import('@/views/form/SubstepForm.jsx'))
-const AdvancedForm = loadable(() => import('@/views/form/AdvancedForm'))
+// 图表模块
+const BasicChart = loadable(() => import('@/views/chart/BasicForm'))
+const SubstepChart = loadable(() => import('@/views/chart/SubstepForm.jsx'))
+const AdvancedChart = loadable(() => import('@/views/chart/AdvancedForm'))
 
+// 表单模块
+const StepForm = loadable(() => import('@/views/form/StepForm'))
+const BasicForm = loadable(() => import('@/views/form/BasicForm'))
+const AdvancedForm = loadable(() => import('@/views/form/AdvancedForm'))
 // 文章模块
 const ArticleList = loadable(() => import('@/views/article/ArticleList'))
 const ArticleAdd = loadable(() => import('@/views/article/ArticleAdd'))
@@ -123,28 +127,56 @@ const routes = [
 		children: [
 			{
 				id: 1201,
-				path: '/form_basic',
-				component: BasicForm,
+				path: '/chart_basic',
+				component: BasicChart,
 				title: 'Echarts图表',
 				permission: ['admin','editor'],
 			},
 			{
 				id: 1202,
-				path: '/form_substep',
-				component: SubstepForm,
+				path: '/chart_substep',
+				component: SubstepChart,
 				title: '地图',
 				permission: ['admin', 'editor'],
 			},
 			{
 				id: 1203,
-				path: '/form_advanced',
-				component: AdvancedForm,
+				path: '/chart_advanced',
+				component: AdvancedChart,
 				title: 'BX Charts图表',
 				permission: ['admin','editor'],
 			},
 		],
 	},
-  
+	{
+		id: 1400,
+		icon: <UnorderedListOutlined />,
+		title: '表单页',
+		permission: ['admin', 'editor'],
+		children: [
+			{
+				id: 1401,
+				path: '/form_basic',
+				component: BasicForm,
+				title: '基础表单',
+				permission: ['admin','editor'],
+			},
+			{
+				id: 1402,
+				path: '/form_substep',
+				component: StepForm,
+				title: '分步表单',
+				permission: ['admin', 'editor'],
+			},
+			{
+				id: 1403,
+				path: '/form_advanced',
+				component: AdvancedForm,
+				title: '高级表单',
+				permission: ['admin','editor'],
+			},
+		],
+	},
 ]
 
 export default routes
