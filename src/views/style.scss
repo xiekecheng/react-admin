@@ -65,16 +65,25 @@
 }
 
 .my-step-form{
+	border-width: 0;
+	border-style: none;
+	.my-confirm{
+		margin: 0 auto;
+		width: 520px;
+	}
 	.steps-content {
 		min-height: 200px;
-		margin-top: 16px;
-		padding-top: 80px;
+		margin-top: 50px;
+		// padding: 50px 200px;
+		// padding-top: 80px;
 		text-align: center;
 		background-color: #fafafa;
 		border: 1px dashed #e9e9e9;
 		border-radius: 2px;
 	}
-	
+	.ant-steps{
+		// padding: 0 200px;
+	}
 	.steps-action {
 		margin-top: 24px;
 	}
