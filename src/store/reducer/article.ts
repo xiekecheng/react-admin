@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-08-14 12:35:26
- * @LastEditTime: 2021-08-15 02:01:36
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-19 00:20:28
+ * @LastEditors: xkccoding@gmail.com
  * @Description: In User Settings Edit
  * @FilePath: /react-admin/src/store/reducer/article.ts
  */
-import { fetchAddArticle, fetchArticleById, fetchArticleList } from '@/api/article'
+import { fetchAddArticle, fetchArticleById, fetchArticleList, fetchPay } from '@/api/article'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../index'
 
@@ -45,6 +45,17 @@ export const getArticleById = createAsyncThunk(
 	}
 )
 
+// 处理支付功能
+export const pay = createAsyncThunk(
+	'article/pay',
+	async (data:any)=>{
+		const result = await fetchPay(data)
+		console.log('result',result.data.data);
+		return result.data.data
+		
+	}
+)
+
 interface ArticleState {
 	value: Number,
 	list: any,
@@ -54,13 +65,14 @@ interface ArticleState {
 		type?:any,
 		articleImg?:string,
 		content?:string
-
-	}
+	},
+	billForm:any
 }
 const initialState: ArticleState = {
 	value: 0,
 	list: [],
-	article:{}
+	article:{},
+	billForm:{}
 }
 
 export const articleSlice = createSlice({
@@ -76,9 +88,10 @@ export const articleSlice = createSlice({
 				state.list = action.payload
 			})
 			.addCase(getArticleById.fulfilled, (state, action) => {
-				console.log('action.payload===2222222',action.payload);
-				
 				state.article = action.payload
+			})
+			.addCase(pay.fulfilled, (state, action) => {
+				state.billForm = action.payload
 			})
 			// builder
 			// .addCase(addArticle.fulfilled, (state, action) => {

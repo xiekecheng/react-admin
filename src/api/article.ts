@@ -1,8 +1,8 @@
 /*
  * @Author: xiekecheng
  * @Date: 2021-08-14 12:23:01
- * @LastEditTime: 2021-08-14 17:22:49
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-19 00:08:14
+ * @LastEditors: xkccoding@gmail.com
  * @Description: article模块API
  * @FilePath: /react-admin/src/api/article.ts
  */
@@ -25,10 +25,18 @@ export const fetchArticleList: any = (params: any) =>
 		params,
 	})
 
-	export const fetchArticleById = (params: any)=>(
-		axios({
-			url:'/antd/article/getArticleById',
-			method:'GET',
-			params
-		})
-	)
+// 根据文章id获取文章
+export const fetchArticleById = (params: any) =>
+	axios({
+		url: '/antd/article/getArticleById',
+		method: 'GET',
+		params,
+	})
+
+// 处理支付
+export const fetchPay: any = (data) =>
+	axios({
+		url: '/antd/article/pay',
+		method: 'post',
+		data,
+	})

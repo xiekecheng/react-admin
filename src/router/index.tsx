@@ -27,7 +27,7 @@ const GoodsUpdate = loadable(() => import('@/views/goods/GoodsUpdate'))
 
 // 图表模块
 const BasicChart = loadable(() => import('@/views/chart/BasicForm'))
-const SubstepChart = loadable(() => import('@/views/chart/SubstepForm.jsx'))
+const SubstepChart = loadable(() => import('@/views/chart/SubstepForm'))
 const AdvancedChart = loadable(() => import('@/views/chart/AdvancedForm'))
 
 // 表单模块
